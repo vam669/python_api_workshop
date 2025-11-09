@@ -1,12 +1,16 @@
 import requests
 import json
-import sys # Using sys.exit() for a clean stop
+import sys # Using sys.exit() for a clean sto
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # --- 1. CONFIGURATION ---
 
 # IMPORTANT: Go to https://api.census.gov/data/key_signup.html to get your own free API key.
 # Paste your key as a string in the variable below:
-API_KEY = "PASTE_YOUR_API_KEY_HERE"
+API_KEY = os.environ.get("API_KEY")
 
 # The base URL for the 2019 1-Year ACS survey
 # (ACS = American Community Survey)
@@ -17,7 +21,8 @@ base_url = "https://api.census.gov/data/2019/acs/acs1"
 # We're getting them "for" all states
 params = {
     "get": "NAME,B01001_001E",
-    "for": "state:*",
+    "for": "county:*",
+    "in": "state:51",
     "key": API_KEY  # Pass the API key to the request
 }
 
